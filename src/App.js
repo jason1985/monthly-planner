@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import moment from 'moment'
+import Task from './Task'
+import { LeftArrow, RightArrow } from './Icons'
 
 //               Calendar (75% width & height of the page)
 // ┌──────────────────────────────────┐
@@ -20,53 +22,22 @@ import moment from 'moment'
 // DaysContainer will always contain 6 rows
 // days not in the current month will be greyed out
 
-// 0 is current month, -1 is previous month, 1 is next month
-// function getMonth(offset) {
-//   let datesArray = []
-//   let month = moment().add(offset, 'month').format('MMMM')
-//   let year = moment().add(offset, 'month').format('y')
-//   let firstDay = parseInt(
-//     moment().add(offset, 'month').startOf('month').format('d')
-//   )
-//   let totalDays = parseInt(
-//     moment().add(offset, 'month').endOf('month').format('D')
-//   )
-
-//   console.log(month, year, firstDay, totalDays)
-
-//   if (firstDay > 0) {
-//     //total days of the previous month
-//     let end = parseInt(
-//       moment()
-//         .add(offset - 1, 'month')
-//         .endOf('month')
-//         .format('D')
-//     )
-
-//     //fill outdays from prevous month
-//     let i = end - firstDay
-//     for (; i < end + 1; i++) {
-//       datesArray.push({ date: { i }, info: 'other' })
-//     }
-//   }
-
-//   //fill out days for current month
-//   for (let i = 1; i < totalDays + 1; i++) {
-//     datesArray.push({ date: { i }, info: 'curr' })
-//   }
-
-//   //fill out days for next month
-//   let remaining = 42 - (totalDays + firstDay)
-//   for (let i = 1; i < remaining + 1; i++) {
-//     datesArray.push({ date: { i }, info: 'other' })
-//   }
-// }
-
 function App() {
   const [dates, setDates] = useState([])
   const [currentMonth, setCurrentMonth] = useState(0)
-  const [displayedMonth,setDisplayedMonth] = useState("")
-  const [displayedYear,setDisplayedYear] = useState("")
+  const [displayedMonth, setDisplayedMonth] = useState('')
+  const [displayedYear, setDisplayedYear] = useState('')
+  const [tasks, setTasks] = useState({})
+
+  //  builds a 42 element array to fill 7x6 calendar
+  //  [{date: 31, info: "other"},
+  //  ...
+  //  {date: 15, info: "curr"},
+  //  {date: 16, info: "today"},
+  //  {date: 17, info: "curr"}
+  //  {date: 18, info: "curr"},
+  //  ...
+  //  {date: 1, info: "other"}]
 
   useEffect(() => {
     let datesArray = []
@@ -80,9 +51,10 @@ function App() {
       moment().add(currentMonth, 'month').endOf('month').format('D')
     )
 
-    console.log(month, year, firstDay, totalDays)
+    // console.log(month, year, firstDay, totalDays)
 
     if (firstDay > 0) {
+      console.log('firstDay', firstDay)
       //total days of the previous month
       let end = parseInt(
         moment()
@@ -92,18 +64,18 @@ function App() {
       )
 
       //fill outdays from prevous month
-      let i = end - firstDay
-      for (; i < end + 1; i++) {
+      let i = end - firstDay + 1
+      for (; i <= end; i++) {
         datesArray.push({ date: i, info: 'other' })
       }
     }
 
     //fill out days for current month
     for (let i = 1; i < totalDays + 1; i++) {
-      if(currentMonth === 0 && i === todaysDate) {
+      if (currentMonth === 0 && i === todaysDate) {
         datesArray.push({ date: i, info: 'today' })
       } else {
-      datesArray.push({ date: i, info: 'curr' })
+        datesArray.push({ date: i, info: 'curr' })
       }
     }
 
@@ -118,13 +90,28 @@ function App() {
     setDisplayedYear(year)
   }, [currentMonth])
 
+  const handleClick = (date) => {
+    let taskKey = `${displayedMonth}-${date.date}-${displayedYear}`
+
+    if (taskKey in tasks) {
+      setTasks({ ...tasks, [`${taskKey}`]: [...tasks[taskKey], '2nd task'] })
+    } else {
+      tasks[taskKey] = ['new value']
+      setTasks({ ...tasks, [`${taskKey}`]: ['first task'] })
+    }
+
+    console.log(tasks)
+  }
+
+  console.log(dates)
+
   return (
     //wrapper takes up the whole page
     <div className="animate-sliding bg-cover bg-jellyfish h-screen w-screen flex justify-center items-center select-none">
       {/* Calendar */}
-      <div className="bg-opacity-50 bg-white h-3/4 w-3/4 rounded-lg overflow-hidden">
+      <div className="bg-opacity-50 bg-white h-4/5 w-3/4 rounded-lg overflow-hidden">
         {/* Wrapper - ensures that MonthAndYear & DayNames takes up 20% height of Calendar  */}
-        <div className="h-1/5">
+        <div className="h-1/6">
           {/* MonthAndYear */}
           <div className=" relative overflow-hidden text-3xl xl:text-5xl flex justify-center items-center h-3/4 w-full">
             {`${displayedMonth} ${displayedYear}`}
@@ -152,67 +139,52 @@ function App() {
         {/* End of Wrapper */}
 
         {/* DaysContainer - takes up the remaining 80% of Calendar */}
-        <div className="grid grid-cols-7 gap-1 grid-rows-6 h-4/5">
+        <div className="grid grid-cols-7 gap-1 grid-rows-6 h-5/6">
+          {/* add dates to calendar & proper style for each date (other,today,curr) */}
           {dates.map((date, index) => {
             let info = ''
             switch (date.info) {
               case 'curr':
                 info =
-                  'relative rounded-sm bg-opacity-20 bg-white overflow-hidden cursor-pointer'
+                  'rounded-sm bg-opacity-20 bg-white overflow-hidden cursor-pointer'
                 break
               case 'other':
                 info =
-                  'relative text-gray-500 text-opacity-40 rounded-sm bg-opacity-20 bg-grey overflow-hidden'
+                  'text-gray-500 text-opacity-40 rounded-sm bg-opacity-20 bg-grey overflow-hidden'
                 break
               case 'today':
                 info =
-                  'relative rounded-sm bg-opacity-50 bg-white overflow-hidden cursor-pointer'
+                  'rounded-sm bg-opacity-50 bg-white overflow-hidden cursor-pointer'
                 break
               default:
             }
+
+            if (date.info === 'other') {
+              return (
+                <div className={info} key={index}>
+                  <div className=" ml-0.5 text-xs">{date.date}</div>
+                </div>
+              )
+            }
+
+            let taskKey = `${displayedMonth}-${date.date}-${displayedYear}`
+
             return (
-              <div className={info} key={index}>
-                <span className="ml-1 text-xs absolute">{date.date}</span>
+              <div
+                onClick={() => handleClick(date)}
+                className={info}
+                key={index}
+              >
+                <div className=" ml-0.5 text-xs">{date.date}</div>
+                {taskKey in tasks === true
+                  ? tasks[taskKey].map((t) => <Task task={t} />)
+                  : null}
               </div>
             )
           })}
         </div>
       </div>
     </div>
-  )
-}
-
-function LeftArrow() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-8 w-8 cursor-pointer"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
-        clipRule="evenodd"
-      />
-    </svg>
-  )
-}
-
-function RightArrow() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-8 w-8 cursor-pointer"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path
-        fillRule="evenodd"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-        clipRule="evenodd"
-      />
-    </svg>
   )
 }
 
