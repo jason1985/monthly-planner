@@ -1,4 +1,10 @@
 /* ./src/index.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* just a test to see custom classes work in tailwind */
+.jg {
+  @apply overflow-hidden flex justify-center items-center
+}

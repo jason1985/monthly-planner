@@ -1,3 +1,5 @@
+// icons from https://heroicons.com/
+
 export function LeftArrow() {
   return (
     <svg

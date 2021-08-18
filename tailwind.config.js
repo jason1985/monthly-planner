@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        jellyfish: "url('jellyfish.jpg')",
+        jellyfish: "url('images/jellyfish.jpg')",
       }),
       keyframes: {
         sliding: {
