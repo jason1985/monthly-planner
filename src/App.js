@@ -31,7 +31,7 @@ function App() {
   const [displayedMonth, setDisplayedMonth] = useState('')
   const [displayedYear, setDisplayedYear] = useState('')
   const [dates, setDates] = useState([])
-  const [tasks, setTasks] = useState({ month: 0 })
+  const [tasks, setTasks] = useState({})
 
   //  builds a 42 element array to fill 7x6 calendar & info key used for styling
   //  other = greyed out dates from months before & after current month(curr)
@@ -92,7 +92,16 @@ function App() {
     setDates(datesArray)
     setDisplayedMonth(month)
     setDisplayedYear(year)
+    if(localStorage.getItem('calendar') !== null) {
+      setTasks(JSON.parse(localStorage.getItem('calendar')))
+    } else {
+      localStorage.setItem('calendar', JSON.stringify({}))
+    }
   }, [currentMonth])
+
+  useEffect(() => {
+    localStorage.setItem('calendar', JSON.stringify(tasks))
+  },[tasks])
 
   return (
     <div className="animate-sliding bg-cover bg-jellyfish h-screen w-screen flex justify-center items-center select-none">
