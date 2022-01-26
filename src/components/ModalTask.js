@@ -43,21 +43,21 @@ function ModalTask({ task, delTask, editTask, editable, setEditable }) {
   }
 
   return (
-    <div className="flex bg-gray-500 items items-center justify-between rounded mb-1">
+    <div className="flex  bg-green-300 items items-center justify-between rounded mb-1">
       <div className="flex items-center">
         <button onClick={() => onEditClick(task, text)}>
           {editing ? <SaveIcon2 /> : <EditIcon />}
         </button>
         {editing ? (
           <input
-					className="w-72 outline-none bg-gray-500 "
+					className="w-72 outline-none bg-green-300 "
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
             ref={editRef}
           ></input>
         ) : (
-          <div className=" bg-gray-500  break-words w-72">{task}</div>
+          <div className=" bg-green-300  break-words w-72">{task}</div>
         )}
       </div>
       <button onClick={onDelClick}>
