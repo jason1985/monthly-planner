@@ -5,8 +5,6 @@ import Day from './components/Day'
 
 //TODO:
 //  make logic for datesArray into a function/hook
-// add: modals & localstorage
-//
 
 // at very end maybe add context menu?
 
