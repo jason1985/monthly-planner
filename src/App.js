@@ -102,8 +102,8 @@ function App() {
   },[tasks])
 
   return (
-    <div className="animate-sliding bg-cover bg-jellyfish h-screen w-screen flex justify-center items-center select-none">
-      <div className="bg-opacity-50 bg-white h-4/5 w-3/4 rounded-lg overflow-hidden">
+    <div className="bg-cover bg-jellyfish h-screen w-screen flex justify-center items-center select-none">
+      <div className="max-w-screen-xl bg-opacity-50 bg-white h-4/5 w-3/4 rounded-lg overflow-hidden">
         <div className="h-1/6">
           <Title
             month={displayedMonth}

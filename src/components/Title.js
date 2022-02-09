@@ -10,6 +10,16 @@ const WeekDays = [
   'Saturday',
 ]
 
+const WeekDaysAbbr = [
+  'Sun',
+  'Mon',
+  'Tues',
+  'Wed',
+  'Thurs',
+  'Fri',
+  'Sat',
+]
+
 function Title({ month, year,setCurrentMonth, currentMonth }) {
   return (
     <>
@@ -28,7 +38,15 @@ function Title({ month, year,setCurrentMonth, currentMonth }) {
       <div className="grid grid-cols-7 gap-1 h-1/4 ">
         {WeekDays.map((day) => (
           <div
-            className="overflow-hidden flex justify-center items-center"
+            className="overflow-hidden justify-center items-center hidden md:flex"
+            key={day}
+          >
+            {day}
+          </div>
+        ))}
+        {WeekDaysAbbr.map((day) => (
+          <div
+            className="overflow-hidden flex justify-center text-sm items-center md:hidden"
             key={day}
           >
             {day}
