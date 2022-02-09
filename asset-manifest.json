@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/monthly-planner/static/css/main.6cea5769.chunk.css",
-    "main.js": "/monthly-planner/static/js/main.b3c0e7c9.chunk.js",
-    "main.js.map": "/monthly-planner/static/js/main.b3c0e7c9.chunk.js.map",
+    "main.css": "/monthly-planner/static/css/main.65c20ea2.chunk.css",
+    "main.js": "/monthly-planner/static/js/main.dfe930e1.chunk.js",
+    "main.js.map": "/monthly-planner/static/js/main.dfe930e1.chunk.js.map",
     "runtime-main.js": "/monthly-planner/static/js/runtime-main.b0b524ed.js",
     "runtime-main.js.map": "/monthly-planner/static/js/runtime-main.b0b524ed.js.map",
     "static/js/2.e48e7519.chunk.js": "/monthly-planner/static/js/2.e48e7519.chunk.js",
     "static/js/2.e48e7519.chunk.js.map": "/monthly-planner/static/js/2.e48e7519.chunk.js.map",
     "index.html": "/monthly-planner/index.html",
-    "static/css/main.6cea5769.chunk.css.map": "/monthly-planner/static/css/main.6cea5769.chunk.css.map",
+    "static/css/main.65c20ea2.chunk.css.map": "/monthly-planner/static/css/main.65c20ea2.chunk.css.map",
     "static/js/2.e48e7519.chunk.js.LICENSE.txt": "/monthly-planner/static/js/2.e48e7519.chunk.js.LICENSE.txt",
     "static/media/index.css": "/monthly-planner/static/media/jellyfish.29850d4f.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.b0b524ed.js",
     "static/js/2.e48e7519.chunk.js",
-    "static/css/main.6cea5769.chunk.css",
-    "static/js/main.b3c0e7c9.chunk.js"
+    "static/css/main.65c20ea2.chunk.css",
+    "static/js/main.dfe930e1.chunk.js"
   ]
 }
