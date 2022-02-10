@@ -19,7 +19,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "cypress": "^9.4.1",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
   }
